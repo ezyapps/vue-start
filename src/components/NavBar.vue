@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import {getTransitionRawChildren, ref} from 'vue'
 import { RouterLink } from 'vue-router'
 
+const activeMenu = ref('home');
+
+function activateMenu(menuName: string) {
+  activeMenu.value = menuName;
+}
 function myFunction() {
   var x = document.getElementById("myTopnav");
   if (x!.className === "topnav") {
@@ -13,11 +19,11 @@ function myFunction() {
 </script>
 <template>
 <div class="topnav" id="myTopnav">
-  <RouterLink class="active" to="/">Home</RouterLink>
-  <RouterLink to="/bookstore">Book Store</RouterLink>
-  <RouterLink to="/about">About</RouterLink>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
+  <RouterLink  to="/" :class="{active: activeMenu === 'home'}" @click="activateMenu('home')">Home</RouterLink>
+  <RouterLink to="/bookstore" :class="{active: activeMenu === 'bookstore'}" @click="activateMenu('bookstore')">Book Store</RouterLink>
+  <RouterLink to="/about" :class="{active: activeMenu === 'about'}" @click="activateMenu('about')">About</RouterLink>
+  <!-- <a href="#contact">Contact</a>
+  <a href="#about">About</a> -->
   <a href="javascript:void(0);" class="icon" @click="myFunction()">
     <i class="fa fa-bars"></i>
   </a>

@@ -6,13 +6,16 @@ const count = computed(()=> {
     return store.state.count;
 })
 const totalBooks = computed(()=>{
-    return store.state.books.length;
+    return store.getters.totalBooks;
 })
 </script>
 
 <template>
     <section>
         <h2>Total Books</h2>
-        <span>{{totalBooks}}</span>
+        <div class="widget">{{store.getters.totalBooks}}</div>
     </section>    
 </template>
+<style scoped>
+
+</style>

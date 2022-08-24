@@ -1,5 +1,6 @@
 
 <script setup lang="ts">
+import { createStructuralDirectiveTransform } from '@vue/compiler-core';
 import { ref, computed } from 'vue';
 import {useStore} from 'vuex'
 
@@ -14,7 +15,7 @@ const count = computed(() => {
     return store.state.count;
 });
 const totalBooks = computed( () => {
-    return store.state.books.length+1;
+    return store.getters.totalBooks+1;
 })
 function saveBook() {
     // alert(issbn.value);
@@ -26,12 +27,19 @@ function saveBook() {
         quantity: quantity.value
     }
     store.commit('pushBook', book);
+    resetForm();
+}
+function resetForm(){
+    issbn.value = '';
+    title.value = '';
+    author.value = '';
+    quantity.value = 0
 }
 </script>
 
 <template>
     <section>
-        <h2>Book Entry Form {{issbn}} {{count}} </h2>
+        <h2>Book Entry Form </h2>
         <form @submit.prevent="saveBook">
             <table>
                 <thead>
@@ -46,7 +54,7 @@ function saveBook() {
                         <td>
                             <select id="author" v-model="author" required>
                                 <option value="">Select Author</option>
-                                <option v-for="author in authors" value="author">{{author}}</option>
+                                <option v-for="author in authors" :value="author">{{author}}</option>
                             </select>
                         </td>
                         <td>

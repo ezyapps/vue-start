@@ -9,6 +9,7 @@ import NavBar from './components/NavBar.vue'
 <header>
   <NavBar />
 </header>
+
 <main>
   <RouterView />
 </main>
@@ -25,8 +26,12 @@ header {
   width: 100%;
 }
 
+main {
+  padding-top: 20px;
+}
+
 @media (min-width: 1024px) {
-  header {
+  header1 {
     display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
