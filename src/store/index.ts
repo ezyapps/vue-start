@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
-export default () => {
-    createStore({
+export const store = createStore({
         state () {
           return {
             count: 10
@@ -12,4 +11,3 @@ export default () => {
           }
         }
       })
-}

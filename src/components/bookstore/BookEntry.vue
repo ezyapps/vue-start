@@ -1,21 +1,27 @@
 
-<script setup lang="ts">
-import { ref } from 'vue';
+<script setup>
+import { ref, computed } from 'vue';
+import {useStore} from 'vuex'
 
+const store = useStore();
 
 const authors = ref (['Shohel Rana', 'Jafor Iqbal', 'Jhonkor Mahbub']); 
 const issbn = ref('');
 const title = ref('');
 const author = ref('');
 const quantity = ref(0);
+const count = computed(() => {
+    return store.state.count;
+});
 function saveBook() {
-    alert(issbn.value);
+    // alert(issbn.value);
+    store.commit('increment');
 }
 </script>
 
 <template>
     <section>
-        <h2>Book Entry Form {{issbn}} {{$store.state.count}} </h2>
+        <h2>Book Entry Form {{issbn}} {{count}} </h2>
         <form @submit.prevent="saveBook">
             <table>
                 <thead>
