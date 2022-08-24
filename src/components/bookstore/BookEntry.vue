@@ -1,5 +1,5 @@
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue';
 import {useStore} from 'vuex'
 
@@ -13,9 +13,19 @@ const quantity = ref(0);
 const count = computed(() => {
     return store.state.count;
 });
+const totalBooks = computed( () => {
+    return store.state.books.length+1;
+})
 function saveBook() {
     // alert(issbn.value);
-    store.commit('increment');
+    var book = {
+        id: totalBooks.value,
+        issbn: issbn.value,
+        title: title.value,
+        author: author.value,
+        quantity: quantity.value
+    }
+    store.commit('pushBook', book);
 }
 </script>
 
@@ -32,7 +42,7 @@ function saveBook() {
                 <tbody>
                     <tr>
                         <td><input type="text" id="issbn" v-model="issbn" required /></td>
-                        <td><input type="text" id="bookName" required /></td>
+                        <td><input type="text" id="bookName" v-model="title" required /></td>
                         <td>
                             <select id="author" v-model="author" required>
                                 <option value="">Select Author</option>
@@ -40,7 +50,7 @@ function saveBook() {
                             </select>
                         </td>
                         <td>
-                            <input type="text" id="quantity" required />
+                            <input type="text" id="quantity" v-model="quantity" required />
                         </td>
                         <td><input type="submit" value="Save Book" /></td>
                     </tr>

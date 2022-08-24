@@ -5,11 +5,14 @@ const store = useStore();
 const count = computed(()=> {
     return store.state.count;
 })
+const totalBooks = computed(()=>{
+    return store.state.books.length;
+})
 </script>
 
 <template>
     <section>
         <h2>Total Books</h2>
-        <span>{{count}}</span>
+        <span>{{totalBooks}}</span>
     </section>    
 </template>
